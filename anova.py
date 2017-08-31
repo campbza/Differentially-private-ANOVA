@@ -2,8 +2,6 @@
 #Ultimate ANOVA file#
 #####################
 
-##ARCOMMENT is Anna's comments
-
 import numpy as np
 from csv_to_datalist import *
 from datagen import *
