@@ -180,18 +180,18 @@ parser.add_option(
         m2 = 0.5
         m3 = 0.65
         stddev = 0.15
-        filename = 'tmp_estimate.csv'
+        filename = 'test_estimate_%druns_%.2fm1_%.2fm2_%.2fm3_%.2fvar_%depsilons_%dcounts.csv' % \
         anova_test(num_runs,epsilon_vals,filename,[m1,m2,m3],stddev,group_counts,realvar=False)
     elif experiment == 'realvar':
         m1 = 0.35
         m2 = 0.5
         m3 = 0.65
         stddev = 0.15
-        filename = 'tmp_realvar.csv'
+        ilename = 'test_realvar_%druns_%.2fm1_%.2fm2_%.2fm3_%.2fvar_%depsilons_%dcounts.csv' % \
         anova_test(num_runs,epsilon_vals,filename,[m1,m2,m3],stddev,group_counts,realvar=True)
     elif experiment == 'noisy':
         means_list = [0.5,0.5,0.5,0.6,0.4,0.43]
         stddev = 0.2
-        filename = 'tmp_noisy.csv'
+        filename = 'test_noisy_%druns_%dmeans_%.2fvar_%depsilons_%dcounts.csv' % \
         anova_test(num_runs,epsilon_vals,filename,means_list,stddev,group_counts,realvar=False)
 
