@@ -35,8 +35,8 @@ stddev = 0.2
 ## Plotting values in CSV files
 
 ```
-python3 csvreader.py ARtest_estimate_1000runs_0.35m1_0.50m2_0.65m3_0.15var_5epsilons_12counts.csv AR_estimate.png 'Differentially private ANOVA, MSE estimate of variance'
+python3 csvreader.py test_estimate_1000runs_0.35m1_0.50m2_0.65m3_0.15var_5epsilons_12counts.csv estimate.png 'Differentially private ANOVA, MSE estimate of variance'
 
-python3 csvreader.py ARtest_realvar_1000runs_0.35m1_0.50m2_0.65m3_0.15var_5epsilons_12counts.csv AR_realvar.png 'Differentially private ANOVA, ground truth variance'
+python3 csvreader.py test_realvar_1000runs_0.35m1_0.50m2_0.65m3_0.15var_5epsilons_12counts.csv realvar.png 'Differentially private ANOVA, ground truth variance'
 
-python3 csvreader.py ARtest_noisy_1000runs_6means_0.20var_5epsilons_12counts.csv AR_noisy.png 'ANOVA with smaller effect size'
+python3 csvreader.py test_noisy_1000runs_6means_0.20var_5epsilons_12counts.csv noisy.png 'ANOVA with smaller effect size'
