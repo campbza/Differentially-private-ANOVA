@@ -165,7 +165,6 @@ def pvals_significance_allow_truncated_lines(infile, outfile, graphtitle, thresh
     plot_lines_allow_truncated(x_vals,y_vals,labels, outfile, threshold, graphtitle)
     return 
 
-##ARCOMMENT
 import sys
 if __name__ == '__main__':
     if len(sys.argv) != 4:
