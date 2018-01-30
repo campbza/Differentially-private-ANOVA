@@ -165,9 +165,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 2 or sys.argv[1].lower() not in options:
         print('Usage: python3 anova.py <experiment>\n\t\t<experiment> is one of "estimate","realvar", or "noisy"')
         sys.exit()
-parser = OptionParser()
-
-parser.add_option(
 
     num_runs = 1000
     epsilon_vals = [None,1,.5,.1,.01]
@@ -181,17 +178,20 @@ parser.add_option(
         m3 = 0.65
         stddev = 0.15
         filename = 'test_estimate_%druns_%.2fm1_%.2fm2_%.2fm3_%.2fvar_%depsilons_%dcounts.csv' % \
+            (num_runs,m1,m2,m3,stddev,len(epsilon_vals),len(group_counts))
         anova_test(num_runs,epsilon_vals,filename,[m1,m2,m3],stddev,group_counts,realvar=False)
     elif experiment == 'realvar':
         m1 = 0.35
         m2 = 0.5
         m3 = 0.65
         stddev = 0.15
-        ilename = 'test_realvar_%druns_%.2fm1_%.2fm2_%.2fm3_%.2fvar_%depsilons_%dcounts.csv' % \
+        filename = 'test_realvar_%druns_%.2fm1_%.2fm2_%.2fm3_%.2fvar_%depsilons_%dcounts.csv' % \
+          (num_runs,m1,m2,m3,stddev,len(epsilon_vals),len(group_counts))
         anova_test(num_runs,epsilon_vals,filename,[m1,m2,m3],stddev,group_counts,realvar=True)
     elif experiment == 'noisy':
         means_list = [0.5,0.5,0.5,0.6,0.4,0.43]
         stddev = 0.2
         filename = 'test_noisy_%druns_%dmeans_%.2fvar_%depsilons_%dcounts.csv' % \
+            (num_runs,len(means_list),stddev,len(epsilon_vals),len(group_counts))
         anova_test(num_runs,epsilon_vals,filename,means_list,stddev,group_counts,realvar=False)
 
