@@ -42,10 +42,10 @@ def SSA(data, epsilon, total_size):
     if epsilon == None:
         return ssa
     else:
-        ssa += np.random.laplace(0.0, (9.0+5.0/total_size)/epsilon) #9+5./total_size is our provable upper-bound on the sensitivity of SSA
+        ssa += np.random.laplace(0.0, (7.0-9.0/total_size)/epsilon) #9+5./total_size is our provable upper-bound on the sensitivity of SSA
         return ssa
 
-def SSE(data, epsilon):
+def SSE(data, epsilon, total_size):
 #input: data list, epsilon value
 #output: epsilon-differentially private SSE
     l = len(data)
@@ -64,7 +64,7 @@ def SSE(data, epsilon):
     if epsilon == None:
         return sse
     else:
-        sse += np.random.laplace(0.0, 7.0/epsilon) #7 is our provable upper-bound on the sensitivity of SSE 
+        sse += np.random.laplace(0.0, (5.0-4.0/total_size)/epsilon) #7 is our provable upper-bound on the sensitivity of SSE 
         return sse
 
 def fstar(n, dfa, dfe, mse, epsilon, total_size):
@@ -77,8 +77,8 @@ def fstar(n, dfa, dfe, mse, epsilon, total_size):
 #input: sample size, degrees of freedom, mse, and epsilon, total_size
 #output: n random variables drawn from chisquare with noise added
     if epsilon != None:
-        numerator = (mse*np.random.chisquare(dfa, n) + np.random.laplace(0.0, (9.0 + 5.0/total_size)/(epsilon/2.0), n))/(dfa)
-        denominator = (mse*np.random.chisquare(dfe, n) + np.random.laplace(0.0, 7.0/(epsilon/2.0), n))/(dfe)
+        numerator = (mse*np.random.chisquare(dfa, n) + np.random.laplace(0.0, (7.0 - 9.0/total_size)/(epsilon/2.0), n))/(dfa)
+        denominator = (mse*np.random.chisquare(dfe, n) + np.random.laplace(0.0, (5.0-4.0/total_size)/(epsilon/2.0), n))/(dfe)
     else:
         numerator = (mse*np.random.chisquare(dfa, n))/(dfa)
         denominator = (mse*np.random.chisquare(dfe, n))/(dfe)
@@ -97,10 +97,10 @@ def anova(data, epsilon, fout, variance):
 
     ## Calculate SSE,SSA,MSE,MSA, and F
     if epsilon == None:
-        sse = SSE(data, None)
+        sse = SSE(data, None, total_size)
         ssa = SSA(data, None,total_size)
     else:
-        sse = SSE(data, epsilon / 2)
+        sse = SSE(data, epsilon / 2, total_size)
         ssa = SSA(data, epsilon / 2, total_size)
     mse = sse / dfe
     msa = ssa / dfa
@@ -137,8 +137,8 @@ def anova_test(num_runs, epsilon_vals, filename, means_list, stddev, group_count
             k = 0
             numsig = 0
             while k < num_runs:
-                if k % 20 == 0:
-                    print('  run %d of %d' % (k,num_runs))
+                #if k % 20 == 0:
+                    #print('  run %d of %d' % (k,num_runs))
                 data = datagen(means_list,stddev,group_counts[j])
                 ## IF/ELSE handles whether we pass in the real variance
                 if realvar:
@@ -168,7 +168,7 @@ if __name__ == '__main__':
 
     num_runs = 1000
     epsilon_vals = [None,1,.5,.1,.01]
-    group_counts = [30,300,3000]
+    group_counts = [30,100,300,1000,2000,3000,5000,7000,8000,10000,20000,50000,100000,300000]
     
 
     experiment = sys.argv[1].lower()
